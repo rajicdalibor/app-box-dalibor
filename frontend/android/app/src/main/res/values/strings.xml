@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Test notification translation English-->
+    <string name="TEST_NOTIFICATION_TITLE">Test notification title</string>
+    <string name="TEST_NOTIFICATION_SUBTITLE">Test notification subtitle</string>
+</resources>
+

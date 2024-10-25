@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  Runner
+
+  Created by App in a Box team on 21.10.24..
+  
+*/
+
+"TEST_NOTIFICATION_TITLE" = "Testbenachrichtigungstitel";
+"TEST_NOTIFICATION_SUBTITLE" = "Untertitel der Testbenachrichtigung";

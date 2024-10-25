@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+printf "\e[33;1m%s\e[0m\n" 'Running code format'
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+resultFlutter=$(fvm dart format $SCRIPT_DIR/../frontend)
+resultBackend=$(cd $SCRIPT_DIR/../backend/functions && npm run lint:fix)
+resultAdmin=$(cd $SCRIPT_DIR/../admin && npm run format && git status)
+
+if [ "$(echo $resultFlutter | grep "Changes not staged for commit")" ]; then
+  printf "\e[31;1m%s\e[0m\n" 'Format applied changes to dart code, please recommit'
+  exit 1
+fi
+
+if [ "$(echo $resultBackend | grep "Changes not staged for commit")" ]; then
+  printf "\e[31;1m%s\e[0m\n" 'Format applied changes to cloud functions code, please recommit'
+  exit 1
+fi
+
+if [ "$(echo $resultAdmin | grep "Changes not staged for commit")" ]; then
+  printf "\e[31;1m%s\e[0m\n" 'Format applied changes admin dashboard code, please recommit'
+  exit 1
+fi
+
+printf "\e[32;1m%s\e[0m\n" 'Finished running code format'

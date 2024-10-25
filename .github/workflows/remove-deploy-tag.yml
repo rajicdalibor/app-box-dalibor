@@ -1,0 +1,43 @@
+name: Remove deploy tag
+on:
+  push:
+    tags:
+      - dev-deploy
+
+jobs:
+
+  remove-tag:
+    name: Remove deploy tag
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: '0'
+
+      # Determine the environment name
+      - name: Determine the environment name
+        run: |-
+          GITHUB_ACTIONS_TAG=${GITHUB_REF:10}
+          ENVIRONMENT_LOWERCASE=$(echo $GITHUB_ACTIONS_TAG | sed s/-deploy//g)
+          ENVIRONMENT=$(echo $ENVIRONMENT_LOWERCASE | tr a-z A-Z)
+          echo "ENVIRONMENT is $ENVIRONMENT"
+          echo "ENVIRONMENT_LOWERCASE=${ENVIRONMENT_LOWERCASE}" >> $GITHUB_ENV
+          echo "ENVIRONMENT=${ENVIRONMENT}" >> $GITHUB_ENV
+          echo "GITHUB_ACTIONS_TAG=${GITHUB_ACTIONS_TAG}" >> $GITHUB_ENV
+
+      - name: Delete github action tag '${{ env.GITHUB_ACTIONS_TAG }}' which triggered the workflow
+        run: |-
+          GITHUB_ACTIONS_TAG=${{ env.GITHUB_ACTIONS_TAG }}
+          echo "Will delete tag '${GITHUB_ACTIONS_TAG}'"
+          git tag --delete ${GITHUB_ACTIONS_TAG}
+          git push origin :refs/tags/${GITHUB_ACTIONS_TAG}
+
+      - name: Update tags
+        run: |-
+          TAG_CURRENT=${ENVIRONMENT_LOWERCASE}-current
+          echo "Will delete tag '${TAG_CURRENT}' (wherever it points; if existing) and retag"
+          git push origin :refs/tags/${TAG_CURRENT} || echo "ignore (eventual) errors of previous command (normal on first run)"
+          git tag --delete ${TAG_CURRENT} || echo "ignore (eventual) errors of previous command (normal on first run)"
+          git tag ${TAG_CURRENT}
+          git push origin ${TAG_CURRENT}

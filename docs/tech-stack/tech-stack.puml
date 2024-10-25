@@ -1,0 +1,74 @@
+@startuml
+!define IMAGESSURL https://raw.githubusercontent.com/plantuml-stdlib/gilbarbara-plantuml-sprites/v1.1/pngs
+
+package "Frontend" as frontend {
+
+  package "App in a box App" as projectApp {
+    rectangle "<img:IMAGESSURL/flutter.png>\nFlutter" as flutterCA
+    rectangle "<img:IMAGESSURL/eslint.png>\nEslint" as eslintCA
+    rectangle "<img:IMAGESSURL/prettier.png>\nPrettier" as prettierCA
+
+    flutterCA -[hidden]right-> eslintCA
+    eslintCA -[hidden]right-> prettierCA
+  }
+
+  package "Admin portal" as webApp {
+    rectangle "<img:IMAGESSURL/nextjs-icon.png>\nNextJS" as nextjs
+    rectangle "<img:IMAGESSURL/react.png>\nReact" as reactWeb
+    rectangle "<img:IMAGESSURL/typescript-icon-round.png>\nTypescript" as typescriptWeb
+    rectangle "<img:IMAGESSURL/material-ui.png>\nMaterial" as mui
+    rectangle "<img:IMAGESSURL/eslint.png>\nEslint" as eslintWeb
+    rectangle "<img:IMAGESSURL/prettier.png>\nPrettier" as prettierWeb
+
+    nextjs -[hidden]right-> reactWeb
+    reactWeb -[hidden]right-> typescriptWeb
+    typescriptWeb -[hidden]right-> mui
+    mui -[hidden]right-> eslintWeb
+    eslintWeb -[hidden]right-> prettierWeb
+  }
+}
+
+package "Backend Services" as backend {
+  package "Database" as database {
+    rectangle "<img:IMAGESSURL/firebase.png>\nFireStore" as fireStore
+  }
+
+  package "Auth" as auth {
+    rectangle "<img:IMAGESSURL/firebase.png>\nFirebase Auth" as firebaseAuth
+  }
+
+  package "Services" as services {
+    rectangle "<img:IMAGESSURL/nodejs-icon.png>\nNodeJS" as nodeService
+    rectangle "<img:IMAGESSURL/typescript-icon-round.png>\nTypescript" as typescriptNode
+
+    nodeService -[hidden]right- typescriptNode
+  }
+}
+
+package "Infrastructure" as infastructure {
+
+  package "Google Cloud Platform" as gcp {
+    rectangle "<img:IMAGESSURL/google-cloud-functions.png>\nCloud Functions" as cf
+  }
+
+  package "Continuous Integration and Deployment" as cicd {
+    rectangle "<img:IMAGESSURL/github-icon.png>\nGitHub" as github
+    rectangle "<img:IMAGESSURL/github-actions.png>\nGitHub actions" as githubActions
+    rectangle "<#red:x:>\nCodeMagic" as codeMagic
+
+    github -[hidden]right- githubActions
+  }
+}
+
+package "Distribution" as distribution {
+  package "Mobile App Store" {
+    rectangle "<img:IMAGESSURL/google-play-icon.png>\nPlayStore" as playstore
+    rectangle "<img:IMAGESSURL/apple-app-store.png>\nAppStore" as appstore
+  }
+}
+
+frontend -[hidden]right- distribution
+frontend -[hidden]down- backend
+backend -[hidden]right- infastructure
+
+@enduml

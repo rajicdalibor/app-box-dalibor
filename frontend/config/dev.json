@@ -1,0 +1,22 @@
+{
+  "env": "dev",
+  "label": "Dev",
+  "SUPPORT_EMAIL": "app-in-a-box-devs@3ap.ch",
+  "PROJECT_ID": "aaap-app-in-a-box",
+  "MESSAGING_SENDER_ID": "536695806690",
+  "STORAGE_BUCKET": "aaap-app-in-a-box.appspot.com",
+
+  "ANDROID_APP_ID": "1:536695806690:android:4d7f0b35448aef34179cbb",
+  "ANDROID_API_KEY": "AIzaSyDbeQYSa4kfO5cIXTPWYgp5wkRcdJl48ME",
+
+  "IOS_API_KEY": "AIzaSyDklx5iecD7YAHMbLPXPB2yNYmOxnI6bG0",
+  "IOS_APP_ID": "1:536695806690:ios:9a8bae05bb12e408179cbb",
+  "IOS_BUNDLE_ID": "ch.aaap.aiab.playground",
+  "IOS_CLIENT_ID": "<CHECK IN APPLE CONNECT>",
+
+  "NAVIGATION_TYPE": "footer",
+
+  "PLAY_STORE_APP_URL": "https://3ap.ch/",
+  "APP_STORE_APP_URL": "https://3ap.ch/",
+  "GOOGLE_MAPS_API_KEY": ""
+}

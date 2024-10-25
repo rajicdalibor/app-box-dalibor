@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "536695806690",
+    "project_id": "aaap-app-in-a-box",
+    "storage_bucket": "aaap-app-in-a-box.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:536695806690:android:4d7f0b35448aef34179cbb",
+        "android_client_info": {
+          "package_name": "ch.aaap.aiab.playground"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbeQYSa4kfO5cIXTPWYgp5wkRcdJl48ME"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

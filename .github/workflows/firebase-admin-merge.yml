@@ -1,0 +1,44 @@
+name: Deploy to Firebase Admin portal on merge
+on:
+  push:
+    branches:
+      - develop
+    paths:
+      - "admin/**"
+
+jobs:
+  build-and-deploy-admin-portal:
+    environment: development
+    name: Build and deploy admin portal
+    runs-on: ubuntu-latest
+    env:
+      working-directory: "admin"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: ${{ env.working-directory }}/.nvmrc
+
+      - name: Install dependencies
+        working-directory: ${{ env.working-directory }}
+        run: npm ci
+
+      - name: Build web app
+        working-directory: ${{ env.working-directory }}
+        run: npm run build
+        env:
+          VITE_FIREBASE_ENV: 'DEV'
+          VITE_RE_CAPTCHA_KEY: ${{ secrets.VITE_RE_CAPTCHA_KEY }}
+          VITE_CONSOLE_URL: 'https://console.firebase.google.com/project/aaap-app-in-a-box/firestore/data'
+
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_AAAP_APP_IN_A_BOX }}"
+          channelId: live
+          projectId: aaap-app-in-a-box
+          target: app-in-a-box-admin
+          entryPoint: ${{ env.working-directory }}

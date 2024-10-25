@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "useDefineForClassFields": true,
+    "module": "CommonJS",
+    "outDir": "lib",
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "sourceMap": true,
+    "strict": true,
+    "target": "ES2017",
+    "moduleResolution": "Node",
+    "isolatedModules": false,
+    "noUnusedParameters": false,
+    "noFallthroughCasesInSwitch": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@helloWorld": ["hello_world/index"],
+      "@messaging": ["messaging/index"],
+      "@model": ["model/index"],
+      "@utils": ["utils/index"]
+    }
+  },
+  "compileOnSave": true,
+  "include": ["src"],
+  "exclude": ["node_modules", "lib"]
+}
